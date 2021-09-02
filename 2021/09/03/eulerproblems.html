@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      8 min read
+      9 min read
     
 </span></p>
 
@@ -168,8 +168,8 @@ What is the smallest positive number that is evenly divisible by all of the numb
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next, the goal is to code a factor tree where the "end" or what is returned are all the prime factors of the given number.</p>
-<p>We will find the prime factors of this given number (n) using knowledge about whether a number is prime in range 1 to n from the above function that returns the prime numbers in range 1 to n.</p>
+<p>Next, the goal is to code a factor tree where the "ends" or what is returned are all the prime factors of the given number.</p>
+<p>We will find the prime factors of this given number (n) using knowledge about whether a number is prime in range 1 to n from the above function that returns the prime numbers in range 1 to n. Recursion works well here because we want to break down n into smaller parts each time until n equals 1 and we cannot find any more prime factors.</p>
 
 </div>
 </div>
@@ -186,7 +186,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
 <span class="sd">    recursively find prime factors of number given prime numbers in range 1 to that number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="c1"># base case: if n = 1, there are no prime factors</span>
+        <span class="c1"># base case: if n = 1, there are no more prime factors</span>
         <span class="k">return</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">prime_numbers</span><span class="p">:</span>
         <span class="c1"># loop through each number in the list of prime numbers in range 1 to n</span>
