@@ -300,16 +300,16 @@ For which value of p ≤ 1000, is the number of solutions maximised?</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This question involves pythagorean theorem ($a^2 + b^2 = c^2$). The first step is to define a function that returns the number of solutions that meet the right angle triangle side length definition given a perimeter.</p>
-<p>We know that a and b have to be at least 1 and cannot be more than half the perimeter. So, we will use a to loop through all integers from 1 to $p/2$.</p>
+<p>This question involves pythagorean theorem (a^2 + b^2 = c^2). The first step is to define a function that returns the number of solutions that meet the right angle triangle side length definition given a perimeter.</p>
+<p>We know that a and b have to be at least 1 and cannot be more than half the perimeter. So, we will use a to loop through all integers from 1 to p/2.</p>
 <p>Given these two equations:<br />
-$a^2 + b^2 = c^2$  (pythagorean theorem)<br />
-$a + b + c = p$  (definition of perimeter)</p>
+a^2 + b^2 = c^2  (pythagorean theorem)<br />
+a + b + c = p  (definition of perimeter)</p>
 <p>We can solve for b and c.<br />
-1) $a + b + c = p$ --&gt; $b+c = p-a$<br />
-2) $a^2 + b^2 = c^2$ --&gt; $c-b = \frac{a^2}{p-a}$<br />
-3) $(c-b) + (c+b) = \frac{a^2}{p-a} + (p-a)$ --&gt; $c = \frac{a^2 + (p-a)^2}{2 *(p-a)}$</p>
-<p>Then, using pythagorean theorem, $b = \sqrt{c^2 - a^2}$</p>
+1) a + b + c = p --&gt; b+c = p-a<br />
+2) a^2 + b^2 = c^2 --&gt; c-b = a^2/(p-a)<br />
+3) (c-b) + (c+b) = a^2/(p-a) + (p-a) --&gt; c = (a^2 + (p-a)^2)/(2 *(p-a)</p>
+<p>Then, using pythagorean theorem, b = sqrt(c^2 - a^2)</p>
 <p>The final step is to check whether the definition of perimeter is met and make sure we have the correct value for a.</p>
 
 </div>
