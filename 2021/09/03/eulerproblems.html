@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Solving three problems from the Euler Project (with increasing difficulty) | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Solving three problems from the Euler Project (with increasing difficulty)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://saahithirao.github.io/bios-823-blog/2021/09/03/eulerproblems.html" />
+<meta property="og:url" content="https://saahithirao.github.io/bios-823-blog/2021/09/03/eulerproblems.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-03T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2021-09-03T00:00:00-05:00","url":"https://saahithirao.github.io/bios-823-blog/2021/09/03/eulerproblems.html","@type":"BlogPosting","headline":"Solving three problems from the Euler Project (with increasing difficulty)","dateModified":"2021-09-03T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saahithirao.github.io/bios-823-blog/2021/09/03/eulerproblems.html"},"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/bios-823-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saahithirao.github.io/bios-823-blog/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/bios-823-blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/bios-823-blog/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/bios-823-blog/about/">About Me</a><a class="page-link" href="/bios-823-blog/search/">Search</a><a class="page-link" href="/bios-823-blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Solving three problems from the Euler Project (with increasing difficulty)</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-09-03T00:00:00-05:00" itemprop="datePublished">
+        Sep 3, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/saahithirao/bios-823-blog/tree/master/_notebooks/2021-09-03-eulerproblems.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/bios-823-blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/saahithirao/bios-823-blog/master?filepath=_notebooks%2F2021-09-03-eulerproblems.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/bios-823-blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/saahithirao/bios-823-blog/blob/master/_notebooks/2021-09-03-eulerproblems.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/bios-823-blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-09-03-eulerproblems.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-5:-Smallest-Multiple">Problem 5: Smallest Multiple<a class="anchor-link" href="#Problem-5:-Smallest-Multiple"> </a></h3><p>Description: 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.<br />
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After reading this question, I immediately thought about prime factorization and factor trees. The goal is to program a factor tree and work backwards from the prime factors to calculate the smallest number that is evenly divisible by all numbers from 1 to 20.<br />
+Note that 2520 has to be divisible by the prime numbers from 1 to 10 in order to be divisible by all numbers 1 to 10 without any remainder. Knowing this, we don't have to check whether 2520 is divisible by every number from 1 to 10 and this will save us time.<br />
+So to begin, we will define a function to return a list of all the prime numbers from 1 to a given number. This will help us code our factor tree.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">prime_num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return list of prime numbers given a number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># prime numbers have to be greater than 1</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># number is not prime (number is divisible by a number other than one and itself)</span>
+                    <span class="c1"># so, return to outer for loop and increment by one</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># number is prime so add to list</span>
+                <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">primes</span>
+
+<span class="c1"># print(prime_num(10))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[2, 3, 5, 7]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, the goal is to code a factor tree where the "end" or what is returned are all the prime factors of the given number.<br />
+We will find the prime factors of this given number (n) using knowledge about whether a number is prime in range 1 to n from the above function that returns the prime numbers in range 1 to n.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    recursively find prime factors of number given prime numbers in range 1 to that number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># base case: if n = 1, there are no prime factors</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">prime_numbers</span><span class="p">:</span>
+        <span class="c1"># loop through each number in the list of prime numbers in range 1 to n</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># return the prime factor and use recursion to find next prime factor</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">+</span> <span class="n">find_prime_factors</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[2, 2, 5]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will write a final function that uses the two functions we have written. We know the prime numbers from 1 to a given number from the first function. We can also find the prime factors of a number from the second function.</p>
+<p>Now, we will find the prime factors of every number below 20 (using the second function). We will keep track of the maximum prime factors. For example, the prime factors of 2 and 3 respectively are 2 and 3 and the prime factors of 4 are 2 and 2, so the maximum count of the prime factor 2 is 2 and of 3 is 1 and the prime factors of the smallest number evenly divisible by 2, 3, and 4, are 2, 2, and 3 and NOT 2, 3, 2, and 2. This means the smallest number equals 2<em>2</em>3 = 12.</p>
+<p>Using this same logic, we will use these prime factors to calculate the smallest number, where the smallest number has the same prime factors.</p>
+<p>Since the problem asks us to find the smallest positive number that is evenly divisible by all of the numbers from 1 to 20, we will assume that n is 20 and that the range is from 1 to 20.</p>
+<p>We recently reviewed the collections module, so we will use that to count the maximum number of each prime factor.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    print smallest number evenly divisible by all numbers from 1 to 20</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">prime_numbers</span> <span class="o">=</span> <span class="n">prime_num</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">max_primes</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+        <span class="c1"># creating a factor tree for each number from 2 to 20</span>
+        <span class="n">prime_factors</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">find_prime_factors</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="c1"># keeps maximum of counts of each prime factor</span>
+        <span class="n">max_primes</span> <span class="o">=</span> <span class="n">prime_factors</span> <span class="o">|</span> <span class="n">max_primes</span>
+        
+    <span class="n">smallest_num</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">prime</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">max_primes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># based on prime factors, calculate smallest number by multiplying</span>
+        <span class="n">smallest_num</span> <span class="o">=</span> <span class="n">smallest_num</span> <span class="o">*</span> <span class="p">(</span><span class="n">prime</span> <span class="o">**</span> <span class="n">amount</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">smallest_num</span><span class="p">)</span>
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>232792560
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The smallest positive number that is evenly divisible by all of the numbers from 1 to 20 is 232792560.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-39:-Integer-Right-Triangles">Problem 39: Integer Right Triangles<a class="anchor-link" href="#Problem-39:-Integer-Right-Triangles"> </a></h3><p>Description: If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.<br />
+{20,48,52}, {24,45,51}, {30,40,50}<br />
+For which value of p ≤ 1000, is the number of solutions maximised?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This question involves pythagorean theorem ($a^2 + b^2 = c^2$). The first step is to define a function that returns the number of solutions that meet the right angle triangle side length definition given a perimeter.</p>
+<p>We know that a and b have to be at least 1 and cannot be more than half the perimeter. So, we will use a to loop through all integers from 1 to $p/2$.</p>
+<p>Given these two equations:<br />
+$a^2 + b^2 = c^2$  (pythagorean theorem)<br />
+$a + b + c = p$  (definition of perimeter)</p>
+<p>We can solve for b and c.<br />
+1) $a + b + c = p$ --&gt; $b+c = p-a$<br />
+2) $a^2 + b^2 = c^2$ --&gt; $c-b = \frac{a^2}{p-a}$<br />
+3) $(c-b) + (c+b) = \frac{a^2}{p-a} + (p-a)$ --&gt; $c = \frac{a^2 + (p-a)^2}{2 *(p-a)}$</p>
+<p>Then, using pythagorean theorem, $b = \sqrt{c^2 - a^2}$</p>
+<p>The final step is to check whether the definition of perimeter is met and make sure we have the correct value for a.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_side_lengths</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return number of solutions to right angle triangles given a perimeter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_solutions</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># an integer side length of a right triangle has to be at least 1 and not more than half the perimeter</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># solve pythagorean theorem for c and b</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">a</span><span class="p">))</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+        
+        <span class="c1"># definition of perimeter</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">num_solutions</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="c1"># a and b can be switched in a solution, but we only want one solution of possible integral side lengths</span>
+    <span class="k">return</span> <span class="n">num_solutions</span><span class="o">//</span><span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we want to find the perimeter where the number of solutions, given that we know the number of solutions for a perimeter from the previous exquation, is maximized for perimeters ≤ 1000. We will use a dictionary to store the perimeter and the number of solutions for that perimeter.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">maximized</span><span class="p">(</span><span class="n">perimeter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    print perimeter where the number of solutions is maximized for perimeter &lt;= 1000 </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;solutions&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;perimeter&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">perimeter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">find_side_lengths</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;solutions&#39;</span><span class="p">]:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;solutions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_side_lengths</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;perimeter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;perimeter&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">maximized</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>840
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The number of solutions is maximised at a perimeter of 840.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-112:-Bouncy-Numbers">Problem 112: Bouncy Numbers<a class="anchor-link" href="#Problem-112:-Bouncy-Numbers"> </a></h3><p>Decription: Working from left-to-right if no digit is exceeded by the digit to its left it is called an increasing number; for example, 134468.</p>
+<p>Similarly if no digit is exceeded by the digit to its right it is called a decreasing number; for example, 66420.</p>
+<p>We shall call a positive integer that is neither increasing nor decreasing a "bouncy" number; for example, 155349.</p>
+<p>Clearly there cannot be any bouncy numbers below one-hundred, but just over half of the numbers below one-thousand (525) are bouncy. In fact, the least number for which the proportion of bouncy numbers first reaches 50% is 538.</p>
+<p>Surprisingly, bouncy numbers become more and more common and by the time we reach 21780 the proportion of bouncy numbers is equal to 90%.</p>
+<p>Find the least number for which the proportion of bouncy numbers is exactly 99%.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">bouncy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return True if the number is a bouncy number and false if the number is not bouncy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span> <span class="c1"># create list of digits</span>
+    <span class="n">increasing</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">decreasing</span> <span class="o">=</span> <span class="n">increasing</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">increasing</span> <span class="o">!=</span> <span class="n">number</span> <span class="ow">and</span> <span class="n">decreasing</span> <span class="o">!=</span> <span class="n">number</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/bios-823-blog/2021/09/03/eulerproblems.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/bios-823-blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/bios-823-blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/bios-823-blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/bios-823-blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/bios-823-blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
