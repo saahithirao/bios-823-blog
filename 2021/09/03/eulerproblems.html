@@ -161,17 +161,16 @@ What is the smallest positive number that is evenly divisible by all of the numb
 <span class="sd">    return list of prime numbers given a number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c1"># prime numbers have to be greater than 1</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="c1"># number is not prime (divisible by a number other than one and itself)</span>
-                    <span class="c1"># return to outer for loop and increment by one</span>
-                    <span class="k">break</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># number is prime so add to list</span>
-                <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="c1"># prime numbers have to be greater than 1</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># number is not prime (divisible by a number other than one and itself)</span>
+                <span class="c1"># return to outer for loop and increment by one</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># number is prime so add to list</span>
+            <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">primes</span>
 </pre></div>
 
@@ -201,6 +200,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    recursively find prime factors of number given prime numbers in range 1 to that number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prime_numbers</span> <span class="o">=</span> <span class="n">prime_num</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="c1"># base case: if n = 1, there are no more prime factors</span>
         <span class="k">return</span> <span class="p">[]</span>
@@ -221,8 +221,8 @@ What is the smallest positive number that is evenly divisible by all of the numb
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will write a final function that uses the two functions we have written. We know the prime numbers from 1 to a given number from the first function. We can also find the prime factors of a number from the second function.</p>
-<p>Now, we will find the prime factors of every number below 20 (using the second function). We will keep track of the maximum prime factors. For example, the prime factors of 2 and 3, respectively, are 2 and 3 and the prime factors of 4 are 2 and 2. So, the maximum count of the prime factor 2 is 2 and of 3 is 1 and the prime factors of the smallest number evenly divisible by 2, 3, and 4, are 2, 2, and 3 and NOT 2, 3, 2, and 2. This means the smallest number equals (2)(2)(3) = 12.</p>
-<p>Using this same logic, we will use maximum prime factors to calculate the smallest number evenly divisible by all of the numbers from 1 to 20. We will assume that n is 20 and that the range is from 1 to 20.</p>
+<p>Now, we will find the prime factors of every number 20 and below (using the second function). We will keep track of the maximum prime factors. For example, the prime factors of 2 and 3, respectively, are 2 and 3 and the prime factors of 4 are 2 and 2. So, the maximum count of the prime factor 2 is 2 and of 3 is 1 and the prime factors of the smallest number evenly divisible by 2, 3, and 4, are 2, 2, and 3 and NOT 2, 3, 2, and 2. This means the smallest number evenly divisible by 2, 3, and 4 equals (2)(2)(3) = 12.</p>
+<p>Using this same logic, we will use the maximum prime factors of numbers 20 and below to calculate the smallest number evenly divisible by all of the numbers from 1 to 20.</p>
 <p>We recently reviewed the collections module, so we will use that to count the maximum number of each prime factor.</p>
 
 </div>
@@ -241,8 +241,6 @@ What is the smallest positive number that is evenly divisible by all of the numb
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    print smallest number evenly divisible by all numbers from 1 to 20</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
-    <span class="n">prime_numbers</span> <span class="o">=</span> <span class="n">prime_num</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">max_primes</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
     
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
@@ -254,7 +252,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
     <span class="n">smallest_num</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">prime</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">max_primes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="c1"># based on prime factors, calculate smallest number by multiplying</span>
-        <span class="n">smallest_num</span> <span class="o">=</span> <span class="n">smallest_num</span> <span class="o">*</span> <span class="p">(</span><span class="n">prime</span> <span class="o">**</span> <span class="n">amount</span><span class="p">)</span>
+        <span class="n">smallest_num</span> <span class="o">=</span> <span class="n">smallest_num</span> <span class="o">*</span> <span class="p">(</span><span class="n">prime</span> <span class="o">**</span> <span class="n">count</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="n">smallest_num</span><span class="p">)</span>
 
@@ -334,7 +332,7 @@ a + b + c = p  (definition of perimeter)</p>
         <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">a</span><span class="p">))</span>
         <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
         
-        <span class="c1"># definition of perimeter</span>
+        <span class="c1"># if definition of perimeter is met, increment solutions by one</span>
         <span class="k">if</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
             <span class="n">num_solutions</span> <span class="o">+=</span> <span class="mi">1</span>
     
@@ -367,7 +365,7 @@ a + b + c = p  (definition of perimeter)</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    print perimeter where the number of solutions is maximized for perimeter &lt;= 1000 </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;solutions&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;perimeter&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span> <span class="c1"># store perimeter value and number of solutions</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;perimeter&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;solutions&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span> <span class="c1"># store perimeter value and number of solutions</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">perimeter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="c1"># if the number of solutions of the current perimeter is greater than the solutions for all perimeters smaller</span>
         <span class="c1"># then store that perimeter and the corresponding number of solutions</span>
@@ -434,7 +432,7 @@ a + b + c = p  (definition of perimeter)</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">number</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span> <span class="c1"># list of digits</span>
     <span class="n">increasing</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="c1"># if number is sorted, it is increasing</span>
-    <span class="n">decreasing</span> <span class="o">=</span> <span class="n">increasing</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># if numbe is sorted in reverse, it is decreasing</span>
+    <span class="n">decreasing</span> <span class="o">=</span> <span class="n">increasing</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># if number is sorted in reverse, it is decreasing</span>
     <span class="k">return</span> <span class="n">increasing</span> <span class="o">!=</span> <span class="n">number</span> <span class="ow">and</span> <span class="n">decreasing</span> <span class="o">!=</span> <span class="n">number</span>
 </pre></div>
 
@@ -464,7 +462,7 @@ a + b + c = p  (definition of perimeter)</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    return least number where the proportion of bouncy numbers that is exactly 99%</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># no number below 100 is bouncy</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># no bouncy numbers below 100</span>
     <span class="n">bouncy_n</span> <span class="o">=</span> <span class="mi">0</span> 
     
     <span class="c1"># continue finding bouncy numbers until proportion hits 99%</span>
