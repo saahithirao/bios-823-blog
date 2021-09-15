@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      6 min read
+      7 min read
     
 </span></p>
 
@@ -141,6 +141,7 @@ window.onload = wrap_img;
     3) Generate sliding windows of a specified width from a long iterable</p>
 <p>We will start with the first step. The goal is to return an arbitrary expansion (expansion after the decimal) of a mathematical expression. The user inputs will be the mathematical expression along with the multiplier (can be 1) and the number of digits of the expansion.</p>
 <p>I first tried using the decimal library to expand the mathematical expression "pi", but I realized I was approximating pi by using the expression "355/113" and I could not find a more accurate way to expand pi, so I opted to use the sympy library. I used the decimal library to expand "e".</p>
+<p>One important thing to note is that a multiplier of the mathematical expression can be an input like "2e" or "3pi". The multiplier must be a separate input from the expression.</p>
 
 </div>
 </div>
@@ -164,7 +165,8 @@ window.onload = wrap_img;
     <span class="k">if</span> <span class="n">expression</span> <span class="o">==</span> <span class="s2">&quot;pi&quot;</span><span class="p">:</span>
         <span class="c1"># N function captures number of digits, so use log formula to capture number of specified digits after decimal</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">N</span><span class="p">(</span><span class="n">multiplier</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">multiplier</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="c1"># obtain digits after decimal and return as integer (integers that start with 0 will not capture 0)</span>
+        <span class="c1"># obtain digits after decimal and return as integer </span>
+        <span class="c1"># integers that start with 0 will not capture the 0</span>
         <span class="n">before</span><span class="p">,</span> <span class="n">after</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">after</span><span class="p">)</span>
     
@@ -189,8 +191,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The next step is to determine if a number is prime. To make this function efficient, we can loop through divisors in the range from 2 to the square root of the number rounded up using the ceiling function from the math module. The mathematical intution behind this is that a number that is not prime will have atleast one factor that is less than its square root (and one factor greater). So if a number has no factors less than its square root, it must be prime. For example, let's take the number 11. The square root of 11 rounded up is 4, so the loop will run from 2 to 4. I used this mathematical intuition because loopin through all numbers in the range to the specified number is very inefficient, especially because we are working with such larger numbers in this question.</p>
-<p>Then, we will check if the input number has a divisor. If it does, the number is not prime and if it does not, continue through the loop.</p>
+<p>The next step is to determine if a number is prime. To make this function efficient, we can loop through divisors in the range from 2 to the square root of the number rounded up using the ceiling function from the math module and check whether that number is a factor. The mathematical intution behind this is that a number that is not prime will have at least one factor that is less than its square root (and one factor greater). So, if a number has no factors less than its square root, it must be prime. For example, let's take the number 11. The square root of 11 rounded up is 4, so the loop will run from 2 to 4. If there are no factors in that range, that 11 is prime, which is the case. I used this mathematical intuition because looping through all numbers in the range to the specified number is very inefficient, especially because we are working with such large numbers in this question.</p>
 
 </div>
 </div>
@@ -237,7 +238,7 @@ window.onload = wrap_img;
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The next step is to write the final helper function. The goal is to generate sliding windows of a specified width from a long iterable.</p>
 <p>I tried a lot of different things to generate sliding windows including using itertools, but decided that using list comprehensions would be equally succinct in accomplishing this task.</p>
-<p>First, we will make the iterable (input number) into a list of its digits as strings. For example, 1234 becomes ['1','2','3','4']. Then, we want to create the window of a specified size for each element (digit) in the range of the number until a window of the specified size cannot be made. For example, if we want a window of size 3, we will loop through all the elements in range of the length of the list of digits minus the size of the window plus one. So, using our example, the loop will run from '1' to '2'. For each iteration, the number of elements equal to the size of the window will be appeneded as a list to a list of windows. So, [['1','2','3'],['2','3','4']] will be the output from the loop. Next, we want to return a list of integers, so we'll combine the digits into one number and convert to an integer.</p>
+<p>First, we will make the iterable (input number) into a list of its digits as strings. For example, 1234 becomes ['1','2','3','4']. Then, we will create a window of a specified size for each element (digit) in the range of the number until a window of the specified size cannot be made. For example, if we want a window of size 3, we will loop through all the elements in range of the length of the list of digits minus the size of the window plus one. So, using our example, the loop will run from '1' to '2'. For each iteration, the window will be appeneded as a list to a list of windows. So, from our example, [['1','2','3'],['2','3','4']] will be the output from the loop. Next, we want to return a list of integers, so we will combine the digits into one number and convert to an integer. From our example, the output would be [123, 234].</p>
 
 </div>
 </div>
@@ -256,16 +257,16 @@ window.onload = wrap_img;
 <span class="sd">    Output: list of windows</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">window_list</span> <span class="o">=</span> <span class="p">[]</span>
+    
     <span class="c1"># length of number has to be greater than the window size</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">iterable</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="p">:</span>
         <span class="c1"># make iterable into list of its digits</span>
         <span class="n">it_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">iterable</span><span class="p">)]</span>
         
-        <span class="c1"># create window by grabbing element in range of current element through the elements in the size of the window</span>
-        <span class="c1"># create separate window as a list for each element in the list </span>
+        <span class="c1"># create window as a list by grabbing elements in range of current element through the elements in the window size</span>
         <span class="n">windows</span> <span class="o">=</span> <span class="p">[</span><span class="n">it_list</span><span class="p">[</span><span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">size</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">it_list</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
         
-        <span class="c1"># convert list of integers in window to a single integer and append to list</span>
+        <span class="c1"># convert list of digits in window to a single integer and append to list</span>
         <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">:</span>
             <span class="n">a_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
             <span class="n">an_integer</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a_string</span><span class="p">)</span>
@@ -273,7 +274,6 @@ window.onload = wrap_img;
             
         <span class="c1"># returns list of integers</span>
         <span class="k">return</span> <span class="n">window_list</span>
-    
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;Size of window bigger than iterable&quot;</span>
 </pre></div>
@@ -287,7 +287,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The final step is to create a function with these helper functions to return a specified digit-length prime in the decimal expansion of a mathematical expression like "pi". First, we will create the decimal expansion using the expansion helper function. Then, we will create the list of sliding windows given the size of the prime number we want. Finally, we will check whether each number in each window is prime and return the first prime number.</p>
+<p>The final step is to create a function with these helper functions to return a specified digit-length prime in the decimal expansion of a mathematical expression like "pi". First, we will create the decimal expansion using the expansion helper function. Then, we will create the list of sliding windows given the size of the prime number we want using the sliding windows helper function. Finally, we will check whether each number in each window is prime using the prime helper function and return the first prime number.</p>
 
 </div>
 </div>
@@ -311,8 +311,9 @@ window.onload = wrap_img;
     <span class="n">expansion_window</span> <span class="o">=</span> <span class="n">sliding_window</span><span class="p">(</span><span class="n">expanded</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
     <span class="c1"># check whether each window (number) is a prime and if it is, return that number</span>
     <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">expansion_window</span><span class="p">:</span>
-        <span class="c1"># ignores numbers that start with 0</span>
+        <span class="c1"># numbers that are less than a length of 10 start with 0, so cannot be prime</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="c1"># check whether number is prime</span>
             <span class="k">if</span> <span class="n">prime_num</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">number</span>
 </pre></div>
@@ -326,7 +327,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we will write unit tests for each function to assert that they are returning the correct values and to check edge cases.</p>
+<p>Now, we will write unit tests for each function to assert that they are returning the correct values and to check edge cases. Two tests are written for each function.</p>
 
 </div>
 </div>
