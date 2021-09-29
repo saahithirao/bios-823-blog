@@ -1,3 +1,21 @@
+{% if page.use_plotly %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
+<script type="text/javascript">
+  if (typeof require !== 'undefined') {
+      require.undef("plotly");
+      requirejs.config({
+          paths: {
+              'plotly': ['https://cdn.plot.ly/plotly-latest.min']
+          }
+      });
+      require(['plotly'], function(Plotly) {
+          window._Plotly = Plotly;
+      });
+  }
+</script>
+{% endif %}
+
+
 {% comment %}
   Placeholder to allow defining custom head, in principle, you can add anything here, e.g. favicons:
 
