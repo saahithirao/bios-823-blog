@@ -11,7 +11,7 @@ import streamlit as st
 st.title("Visualizing Data of Doctorate Recipients")
 st.markdown("""This dashboard visualizes data about doctorate recipients including: 
 demographic information and field of study. 
-Data was collected from the National Center for Science and Engineering Statistics (NCSES) and 
+Data was collected by the National Center for Science and Engineering Statistics (NCSES) and 
 can be found here: https://ncses.nsf.gov/pubs/nsf19301/data.""")
 
 # read data
@@ -65,7 +65,7 @@ def load_data(year):
 
 # Creating widget for selecting data by year, gender, and race (separately)
 st.sidebar.header("User Input")
-selected_year = st.sidebar.selectbox('Year', list(reversed(range(2008,2017))))
+selected_year = st.sidebar.selectbox('Year', list(reversed(range(2008,2018))))
 phds = load_data(selected_year)
 
 unique_gender = phds.Gender.unique()
@@ -78,7 +78,7 @@ df_selected = phds[(phds.Gender.isin(select_gender)) & (phds.Race_Ethnicity.isin
 # calling data table 
 st.subheader("Doctorate recipients by gender & race from 2008-2016")
 st.write("On the sidebar select a year, gender, or race (including all) to display data by year, gender, and/or race")
-st.dataframe(df_selected)
+st.table(df_selected)
 
 # plotting figure
 fig = px.line(df_combine_plot, 
