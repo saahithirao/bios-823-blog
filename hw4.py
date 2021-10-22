@@ -7,8 +7,10 @@ import seaborn as sns
 import streamlit as st
 
 st.title("Is there life after graduate school?")
-st.markdown("""This app performs visuzliazation of data from 
-the survey of Earned Doctorates""")
+st.markdown("""This dashboard visualizes data about doctorate recipients including: 
+demographic information, field of study, and postgraduation plans. 
+Data was collected the National Center for Science and Engineering Statistics (NCSES) and 
+datasets can be found here: https://ncses.nsf.gov/pubs/nsf19301/data.""")
 
 
 df = pd.read_excel("https://ncses.nsf.gov/pubs/nsf19301/assets/data/tables/sed17-sr-tab021.xlsx", header=3)
@@ -67,6 +69,7 @@ df_selected = phds[(phds.Gender.isin(select_gender))]
 
 # calling data table 
 st.subheader("Doctorate recipients by gender & race from 2008-2016")
+st.write("Select a year on the sidebar to display data for that year and select to view data by gender")
 st.dataframe(df_selected)
 
 # plotting figure
@@ -75,5 +78,6 @@ fig = px.line(df_combine_plot,
                 labels = {
                     "phds": "Number of PhDs"
                 })
-st.subheader("Number Doctorate Recipients over Time and by Gender")
+fig.update_traces(mode='markers+lines')
+st.subheader("Number of doctorate recipients by gender over time")
 st.write(fig)
