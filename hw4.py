@@ -9,8 +9,8 @@ import streamlit as st
 st.title("Is there life after graduate school?")
 st.markdown("""This dashboard visualizes data about doctorate recipients including: 
 demographic information, field of study, and postgraduation plans. 
-Data was collected the National Center for Science and Engineering Statistics (NCSES) and 
-datasets can be found here: https://ncses.nsf.gov/pubs/nsf19301/data.""")
+Data was collected from the National Center for Science and Engineering Statistics (NCSES) and 
+can be found here: https://ncses.nsf.gov/pubs/nsf19301/data.""")
 
 
 df = pd.read_excel("https://ncses.nsf.gov/pubs/nsf19301/assets/data/tables/sed17-sr-tab021.xlsx", header=3)
@@ -80,4 +80,5 @@ fig = px.line(df_combine_plot,
                 })
 fig.update_traces(mode='markers+lines')
 st.subheader("Number of doctorate recipients by gender over time")
+st.write("Hover over points to view data for that year")
 st.write(fig)
