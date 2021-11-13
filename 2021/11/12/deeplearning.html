@@ -96,7 +96,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      6 min read
+      5 min read
     
 </span></p>
 
@@ -157,27 +157,28 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import matplotlib.pyplot as plt</span>
-<span class="c1"># import numpy as np</span>
-<span class="c1"># import pandas as pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">necessary</span> <span class="n">libraries</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="c1"># #import tensorflow as tf</span>
-<span class="c1"># #from tensorflow import keras</span>
-<span class="c1"># #import shap</span>
+<span class="c1">#import tensorflow as tf</span>
+<span class="c1">#from tensorflow import keras</span>
+<span class="c1">#import shap</span>
 
-<span class="c1"># #from PIL import Image</span>
-<span class="c1"># #import urllib</span>
-<span class="c1"># import io </span>
+<span class="c1">#from PIL import Image</span>
+<span class="c1">#import urllib</span>
+<span class="kn">import</span> <span class="nn">io</span> 
 
-<span class="c1"># import random</span>
-<span class="c1"># import os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="c1"># from keras.preprocessing.image import ImageDataGenerator,load_img</span>
-<span class="c1"># from keras.utils import to_categorical</span>
-<span class="c1"># from sklearn.model_selection import train_test_split</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">ImageDataGenerator</span><span class="p">,</span><span class="n">load_img</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="c1"># from tensorflow.keras import Sequential</span>
-<span class="c1"># from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation, BatchNormalization</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">BatchNormalization</span>
 </pre></div>
 
     </div>
@@ -215,10 +216,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># width=200</span>
-<span class="c1"># height=200</span>
-<span class="c1"># size=(width,height)</span>
-<span class="c1"># channels = 3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">image</span> <span class="n">specifications</span>
+<span class="n">width</span><span class="o">=</span><span class="mi">200</span>
+<span class="n">height</span><span class="o">=</span><span class="mi">200</span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 
     </div>
@@ -242,31 +244,32 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># trainfiles = []</span>
-<span class="c1"># categories = []</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">training</span> <span class="n">data</span>
+<span class="n">trainfiles</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="c1"># for path in os.listdir(&quot;insects/train/beetles&quot;):</span>
-<span class="c1">#     full_path = os.path.join(&quot;insects/train/beetles&quot;, path)</span>
-<span class="c1">#     if os.path.isfile(full_path):</span>
-<span class="c1">#         trainfiles.append(full_path)</span>
-<span class="c1">#         categories.append(&quot;beetles&quot;)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;insects/train/beetles&quot;</span><span class="p">):</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;insects/train/beetles&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+        <span class="n">trainfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;beetles&quot;</span><span class="p">)</span>
         
-<span class="c1"># for path in os.listdir(&quot;insects/train/cockroach&quot;):</span>
-<span class="c1">#     full_path = os.path.join(&quot;insects/train/cockroach&quot;, path)</span>
-<span class="c1">#     if os.path.isfile(full_path):</span>
-<span class="c1">#         trainfiles.append(full_path)</span>
-<span class="c1">#         categories.append(&quot;cockroach&quot;)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;insects/train/cockroach&quot;</span><span class="p">):</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;insects/train/cockroach&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+        <span class="n">trainfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;cockroach&quot;</span><span class="p">)</span>
 
-<span class="c1"># for path in os.listdir(&quot;insects/train/dragonflies&quot;):</span>
-<span class="c1">#     full_path = os.path.join(&quot;insects/train/dragonflies&quot;, path)</span>
-<span class="c1">#     if os.path.isfile(full_path):</span>
-<span class="c1">#         trainfiles.append(full_path)</span>
-<span class="c1">#         categories.append(&quot;dragonflies&quot;)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;insects/train/dragonflies&quot;</span><span class="p">):</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;insects/train/dragonflies&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+        <span class="n">trainfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;dragonflies&quot;</span><span class="p">)</span>
 
-<span class="c1"># df_train = pd.DataFrame({</span>
-<span class="c1">#     &#39;filename&#39;: trainfiles,</span>
-<span class="c1">#     &#39;category&#39;: categories</span>
-<span class="c1"># })        </span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">trainfiles</span><span class="p">,</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">categories</span>
+<span class="p">})</span>        
 </pre></div>
 
     </div>
@@ -290,31 +293,32 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># testfiles = []</span>
-<span class="c1"># categories = []</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="n">data</span>
+<span class="n">testfiles</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="c1"># for path in os.listdir(&quot;insects/test/beetles&quot;):</span>
-<span class="c1">#     full_path = os.path.join(&quot;insects/test/beetles&quot;, path)</span>
-<span class="c1">#     if os.path.isfile(full_path):</span>
-<span class="c1">#         testfiles.append(full_path)</span>
-<span class="c1">#         categories.append(&quot;beetles&quot;)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;insects/test/beetles&quot;</span><span class="p">):</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;insects/test/beetles&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+        <span class="n">testfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;beetles&quot;</span><span class="p">)</span>
         
-<span class="c1"># for path in os.listdir(&quot;insects/test/cockroach&quot;):</span>
-<span class="c1">#     full_path = os.path.join(&quot;insects/test/cockroach&quot;, path)</span>
-<span class="c1">#     if os.path.isfile(full_path):</span>
-<span class="c1">#         testfiles.append(full_path)</span>
-<span class="c1">#         categories.append(&quot;cockroach&quot;)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;insects/test/cockroach&quot;</span><span class="p">):</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;insects/test/cockroach&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+        <span class="n">testfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;cockroach&quot;</span><span class="p">)</span>
 
-<span class="c1"># for path in os.listdir(&quot;insects/test/dragonflies&quot;):</span>
-<span class="c1">#     full_path = os.path.join(&quot;insects/test/dragonflies&quot;, path)</span>
-<span class="c1">#     if os.path.isfile(full_path):</span>
-<span class="c1">#         testfiles.append(full_path)</span>
-<span class="c1">#         categories.append(&quot;dragonflies&quot;)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;insects/test/dragonflies&quot;</span><span class="p">):</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;insects/test/dragonflies&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+        <span class="n">testfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;dragonflies&quot;</span><span class="p">)</span>
         
-<span class="c1"># df_test = pd.DataFrame({</span>
-<span class="c1">#     &#39;filename&#39;: testfiles,</span>
-<span class="c1">#     &#39;category&#39;: categories</span>
-<span class="c1"># })        </span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">testfiles</span><span class="p">,</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">categories</span>
+<span class="p">})</span>        
 </pre></div>
 
     </div>
@@ -374,7 +378,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -398,14 +402,15 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#   random_state=42)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_df</span><span class="p">,</span><span class="n">validate_df</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+  <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-<span class="c1"># total_train=train_df.shape[0]</span>
-<span class="c1"># total_validate=df_test.shape[0]</span>
-<span class="c1"># batch_size = 10</span>
+<span class="n">total_train</span><span class="o">=</span><span class="n">train_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">total_validate</span><span class="o">=</span><span class="n">df_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="c1"># train_df = train_df.reset_index(drop=True)</span>
-<span class="c1"># validate_df = validate_df.reset_index(drop=True)</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">validate_df</span> <span class="o">=</span> <span class="n">validate_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -429,41 +434,42 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#                                 rescale=1./255,</span>
-<span class="c1">#                                 shear_range=0.1,</span>
-<span class="c1">#                                 zoom_range=0.2,</span>
-<span class="c1">#                                 horizontal_flip=True,</span>
-<span class="c1">#                                 width_shift_range=0.1,</span>
-<span class="c1">#                                 height_shift_range=0.1)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span><span class="n">rotation_range</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                                <span class="n">rescale</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span>
+                                <span class="n">shear_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                <span class="n">zoom_range</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                <span class="n">horizontal_flip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">width_shift_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                <span class="n">height_shift_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
-<span class="c1"># train_generator = train_datagen.flow_from_dataframe(train_df, x_col=&#39;filename&#39;,y_col=&#39;category&#39;,</span>
-<span class="c1">#                                                  target_size=size,</span>
-<span class="c1">#                                                  class_mode=&#39;categorical&#39;,</span>
-<span class="c1">#                                                  batch_size=batch_size)</span>
+<span class="n">train_generator</span> <span class="o">=</span> <span class="n">train_datagen</span><span class="o">.</span><span class="n">flow_from_dataframe</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">x_col</span><span class="o">=</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span><span class="n">y_col</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">,</span>
+                                                 <span class="n">target_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                                 <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+                                                 <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
 
 
-<span class="c1"># validation_datagen = ImageDataGenerator(rescale=1./255)</span>
+<span class="n">validation_datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span><span class="n">rescale</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span>
 
-<span class="c1"># validation_generator = validation_datagen.flow_from_dataframe(</span>
-<span class="c1">#     validate_df, </span>
-<span class="c1">#     x_col=&#39;filename&#39;,</span>
-<span class="c1">#     y_col=&#39;category&#39;,</span>
-<span class="c1">#     target_size=size,</span>
-<span class="c1">#     class_mode=&#39;categorical&#39;,</span>
-<span class="c1">#     batch_size=batch_size)</span>
+<span class="n">validation_generator</span> <span class="o">=</span> <span class="n">validation_datagen</span><span class="o">.</span><span class="n">flow_from_dataframe</span><span class="p">(</span>
+    <span class="n">validate_df</span><span class="p">,</span> 
+    <span class="n">x_col</span><span class="o">=</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span>
+    <span class="n">y_col</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">,</span>
+    <span class="n">target_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
 
-<span class="c1"># test_datagen = ImageDataGenerator(rotation_range=15,</span>
-<span class="c1">#                                 rescale=1./255,</span>
-<span class="c1">#                                 shear_range=0.1,</span>
-<span class="c1">#                                 zoom_range=0.2,</span>
-<span class="c1">#                                 horizontal_flip=True,</span>
-<span class="c1">#                                 width_shift_range=0.1,</span>
-<span class="c1">#                                 height_shift_range=0.1)</span>
+<span class="n">test_datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span><span class="n">rotation_range</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                                <span class="n">rescale</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span>
+                                <span class="n">shear_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                <span class="n">zoom_range</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                <span class="n">horizontal_flip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">width_shift_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                <span class="n">height_shift_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
-<span class="c1"># test_generator = test_datagen.flow_from_dataframe(df_test,x_col=&#39;filename&#39;,y_col=&#39;category&#39;,</span>
-<span class="c1">#                                                  target_size=size,</span>
-<span class="c1">#                                                  class_mode=&#39;categorical&#39;,</span>
-<span class="c1">#                                                  batch_size=batch_size)</span>
+<span class="n">test_generator</span> <span class="o">=</span> <span class="n">test_datagen</span><span class="o">.</span><span class="n">flow_from_dataframe</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span><span class="n">x_col</span><span class="o">=</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span><span class="n">y_col</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">,</span>
+                                                 <span class="n">target_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                                 <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+                                                 <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -503,15 +509,35 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     train_generator, </span>
-<span class="c1">#     epochs=3,</span>
-<span class="c1">#     validation_data=validation_generator,</span>
-<span class="c1">#     batch_size=batch_size,</span>
-<span class="c1">#     verbose=1</span>
-<span class="c1"># )</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">train_generator</span><span class="p">,</span> 
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="n">validation_generator</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1/3
+82/82 [==============================] - 52s 640ms/step - loss: 0.6923 - accuracy: 0.7485 - val_loss: 0.6357 - val_accuracy: 0.7500
+Epoch 2/3
+82/82 [==============================] - 52s 629ms/step - loss: 0.5808 - accuracy: 0.7779 - val_loss: 0.4552 - val_accuracy: 0.8235
+Epoch 3/3
+82/82 [==============================] - 51s 623ms/step - loss: 0.6468 - accuracy: 0.7521 - val_loss: 1.3222 - val_accuracy: 0.5392
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -532,11 +558,12 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for ax, measure in zip(axes, [&#39;loss&#39;, &#39;accuracy&#39;]):</span>
-<span class="c1">#     ax.plot(hist.history[measure], label=measure)</span>
-<span class="c1">#     ax.plot(hist.history[&#39;val_&#39; + measure], label=&#39;val_&#39; + measure)</span>
-<span class="c1">#     ax.legend()</span>
-<span class="c1"># plt.show()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">measure</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="n">measure</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">measure</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_&#39;</span> <span class="o">+</span> <span class="n">measure</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;val_&#39;</span> <span class="o">+</span> <span class="n">measure</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -553,7 +580,7 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;model1.h5&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -577,7 +604,8 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test_acc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_generator</span><span class="p">)</span>
+<span class="n">test_acc</span>
 </pre></div>
 
     </div>
@@ -601,9 +629,10 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     &#39;filename&#39;: testfiles</span>
-<span class="c1"># })</span>
-<span class="c1"># nb_samples = test_df.shape[0]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">testfiles</span>
+<span class="p">})</span>
+<span class="n">nb_samples</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -627,7 +656,7 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_generator</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">nb_samples</span><span class="o">/</span><span class="n">batch_size</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -651,19 +680,20 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     0:&#39;beetles&#39;,</span>
-<span class="c1">#     1:&#39;cockroach&#39;,</span>
-<span class="c1">#     2:&#39;dragonflies&#39;</span>
-<span class="c1"># }</span>
-<span class="c1"># from PIL import Image</span>
-<span class="c1"># import numpy as np</span>
-<span class="c1"># im=Image.open(&quot;insects/test/beetles/5556745.jpg&quot;)</span>
-<span class="c1"># im=im.resize(size)</span>
-<span class="c1"># im=np.expand_dims(im,axis=0)</span>
-<span class="c1"># im=np.array(im)</span>
-<span class="c1"># im=im/255</span>
-<span class="c1"># pred=model.predict_classes([im])[0]</span>
-<span class="c1"># print(pred,results[pred])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="o">=</span><span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span><span class="s1">&#39;beetles&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;cockroach&#39;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;dragonflies&#39;</span>
+<span class="p">}</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">im</span><span class="o">=</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;insects/test/beetles/5556745.jpg&quot;</span><span class="p">)</span>
+<span class="n">im</span><span class="o">=</span><span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+<span class="n">im</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">im</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="n">im</span><span class="o">=</span><span class="n">im</span><span class="o">/</span><span class="mi">255</span>
+<span class="n">pred</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">([</span><span class="n">im</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">results</span><span class="p">[</span><span class="n">pred</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -701,7 +731,7 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">shap</span>
 </pre></div>
 
     </div>
@@ -763,7 +793,8 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># shap_vals, index = explainer.shap_values(test_generator[0][0], ranked_outputs = 3)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">GradientExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_generator</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">shap_vals</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">test_generator</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ranked_outputs</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -787,7 +818,8 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># index_names = np.vectorize(lambda x: names[x])(index)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beetles&#39;</span><span class="p">,</span> <span class="s1">&#39;cockroach&#39;</span><span class="p">,</span> <span class="s1">&#39;dragonflies&#39;</span><span class="p">]</span>
+<span class="n">index_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">names</span><span class="p">[</span><span class="n">x</span><span class="p">])(</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -828,7 +860,8 @@ Found 180 validated image filenames belonging to 3 classes.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display.Image(&quot;./shap.jpg&quot;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./shap.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
