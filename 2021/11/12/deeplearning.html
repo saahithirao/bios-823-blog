@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Dive into Deep Learning, Classifying images | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Dive into Deep Learning, Classifying images" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://saahithirao.github.io/bios-823-blog/2021/11/12/deeplearning.html" />
+<meta property="og:url" content="https://saahithirao.github.io/bios-823-blog/2021/11/12/deeplearning.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-12T00:00:00-06:00" />
+<script type="application/ld+json">
+{"datePublished":"2021-11-12T00:00:00-06:00","url":"https://saahithirao.github.io/bios-823-blog/2021/11/12/deeplearning.html","@type":"BlogPosting","headline":"Dive into Deep Learning, Classifying images","dateModified":"2021-11-12T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saahithirao.github.io/bios-823-blog/2021/11/12/deeplearning.html"},"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/bios-823-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saahithirao.github.io/bios-823-blog/feed.xml" title="fastpages" />
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/bios-823-blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/bios-823-blog/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/bios-823-blog/about/">About Me</a><a class="page-link" href="/bios-823-blog/search/">Search</a><a class="page-link" href="/bios-823-blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dive into Deep Learning, Classifying images</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-11-12T00:00:00-06:00" itemprop="datePublished">
+        Nov 12, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/saahithirao/bios-823-blog/tree/master/_notebooks/2021-11-12-deeplearning.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/bios-823-blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/saahithirao/bios-823-blog/master?filepath=_notebooks%2F2021-11-12-deeplearning.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/bios-823-blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/saahithirao/bios-823-blog/blob/master/_notebooks/2021-11-12-deeplearning.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/bios-823-blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-11-12-deeplearning.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The goal of this blog post is to explain the process of training a deep learning model to classify images (pixels) of insects: beetles, cockroaches, and dragonflies. The neural network (model) will be evaluated on how it classfied the images using Shapley Additive Explanations.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first step is to import all of the necessary libraries. This neural network will be using the tensorflow package and specifically, the keras module.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import matplotlib.pyplot as plt</span>
+<span class="c1"># import numpy as np</span>
+<span class="c1"># import pandas as pd</span>
+
+<span class="c1"># #import tensorflow as tf</span>
+<span class="c1"># #from tensorflow import keras</span>
+<span class="c1"># #import shap</span>
+
+<span class="c1"># #from PIL import Image</span>
+<span class="c1"># #import urllib</span>
+<span class="c1"># import io </span>
+
+<span class="c1"># import random</span>
+<span class="c1"># import os</span>
+
+<span class="c1"># from keras.preprocessing.image import ImageDataGenerator,load_img</span>
+<span class="c1"># from keras.utils import to_categorical</span>
+<span class="c1"># from sklearn.model_selection import train_test_split</span>
+
+<span class="c1"># from tensorflow.keras import Sequential</span>
+<span class="c1"># from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation, BatchNormalization</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using TensorFlow backend.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The next step is to specify the image size because all the images need to be of the same size in the model and specify three color channels.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># width=200</span>
+<span class="c1"># height=200</span>
+<span class="c1"># size=(width,height)</span>
+<span class="c1"># channels = 3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, we will create the training data by finding the file paths of each image. The file paths of the images will be added to a training file list and the corresponding image classifiation (type of insect) will be added to a categories list. These lists are appended to a training dataframe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># trainfiles = []</span>
+<span class="c1"># categories = []</span>
+
+<span class="c1"># for path in os.listdir(&quot;insects/train/beetles&quot;):</span>
+<span class="c1">#     full_path = os.path.join(&quot;insects/train/beetles&quot;, path)</span>
+<span class="c1">#     if os.path.isfile(full_path):</span>
+<span class="c1">#         trainfiles.append(full_path)</span>
+<span class="c1">#         categories.append(&quot;beetles&quot;)</span>
+        
+<span class="c1"># for path in os.listdir(&quot;insects/train/cockroach&quot;):</span>
+<span class="c1">#     full_path = os.path.join(&quot;insects/train/cockroach&quot;, path)</span>
+<span class="c1">#     if os.path.isfile(full_path):</span>
+<span class="c1">#         trainfiles.append(full_path)</span>
+<span class="c1">#         categories.append(&quot;cockroach&quot;)</span>
+
+<span class="c1"># for path in os.listdir(&quot;insects/train/dragonflies&quot;):</span>
+<span class="c1">#     full_path = os.path.join(&quot;insects/train/dragonflies&quot;, path)</span>
+<span class="c1">#     if os.path.isfile(full_path):</span>
+<span class="c1">#         trainfiles.append(full_path)</span>
+<span class="c1">#         categories.append(&quot;dragonflies&quot;)</span>
+
+<span class="c1"># df_train = pd.DataFrame({</span>
+<span class="c1">#     &#39;filename&#39;: trainfiles,</span>
+<span class="c1">#     &#39;category&#39;: categories</span>
+<span class="c1"># })        </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similarly, we will create the testing data. The file paths of the images will be added to a test file list and the corresponding image classifiation (type of insect) will be added to a categories list. These lists are appended to a test dataframe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># testfiles = []</span>
+<span class="c1"># categories = []</span>
+
+<span class="c1"># for path in os.listdir(&quot;insects/test/beetles&quot;):</span>
+<span class="c1">#     full_path = os.path.join(&quot;insects/test/beetles&quot;, path)</span>
+<span class="c1">#     if os.path.isfile(full_path):</span>
+<span class="c1">#         testfiles.append(full_path)</span>
+<span class="c1">#         categories.append(&quot;beetles&quot;)</span>
+        
+<span class="c1"># for path in os.listdir(&quot;insects/test/cockroach&quot;):</span>
+<span class="c1">#     full_path = os.path.join(&quot;insects/test/cockroach&quot;, path)</span>
+<span class="c1">#     if os.path.isfile(full_path):</span>
+<span class="c1">#         testfiles.append(full_path)</span>
+<span class="c1">#         categories.append(&quot;cockroach&quot;)</span>
+
+<span class="c1"># for path in os.listdir(&quot;insects/test/dragonflies&quot;):</span>
+<span class="c1">#     full_path = os.path.join(&quot;insects/test/dragonflies&quot;, path)</span>
+<span class="c1">#     if os.path.isfile(full_path):</span>
+<span class="c1">#         testfiles.append(full_path)</span>
+<span class="c1">#         categories.append(&quot;dragonflies&quot;)</span>
+        
+<span class="c1"># df_test = pd.DataFrame({</span>
+<span class="c1">#     &#39;filename&#39;: testfiles,</span>
+<span class="c1">#     &#39;category&#39;: categories</span>
+<span class="c1"># })        </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This neural network will use a convolution 2D neural net architecture. We will add layers sequentially and each one has separate biases and weights. The output and shape of each layer is shown below. The loss function is 'categorical_crossentropy' and while training the model, this function will be minimized.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">channels</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+  <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The training data will be split into training and validation sets to be used in the model.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#   random_state=42)</span>
+
+<span class="c1"># total_train=train_df.shape[0]</span>
+<span class="c1"># total_validate=df_test.shape[0]</span>
+<span class="c1"># batch_size = 10</span>
+
+<span class="c1"># train_df = train_df.reset_index(drop=True)</span>
+<span class="c1"># validate_df = validate_df.reset_index(drop=True)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After some research, ImageDataGenerator seemed like the most optimal solution to create this image classification model as it can efficiently load images in batches. The output shows the number of images in each data set.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#                                 rescale=1./255,</span>
+<span class="c1">#                                 shear_range=0.1,</span>
+<span class="c1">#                                 zoom_range=0.2,</span>
+<span class="c1">#                                 horizontal_flip=True,</span>
+<span class="c1">#                                 width_shift_range=0.1,</span>
+<span class="c1">#                                 height_shift_range=0.1)</span>
+
+<span class="c1"># train_generator = train_datagen.flow_from_dataframe(train_df, x_col=&#39;filename&#39;,y_col=&#39;category&#39;,</span>
+<span class="c1">#                                                  target_size=size,</span>
+<span class="c1">#                                                  class_mode=&#39;categorical&#39;,</span>
+<span class="c1">#                                                  batch_size=batch_size)</span>
+
+
+<span class="c1"># validation_datagen = ImageDataGenerator(rescale=1./255)</span>
+
+<span class="c1"># validation_generator = validation_datagen.flow_from_dataframe(</span>
+<span class="c1">#     validate_df, </span>
+<span class="c1">#     x_col=&#39;filename&#39;,</span>
+<span class="c1">#     y_col=&#39;category&#39;,</span>
+<span class="c1">#     target_size=size,</span>
+<span class="c1">#     class_mode=&#39;categorical&#39;,</span>
+<span class="c1">#     batch_size=batch_size)</span>
+
+<span class="c1"># test_datagen = ImageDataGenerator(rotation_range=15,</span>
+<span class="c1">#                                 rescale=1./255,</span>
+<span class="c1">#                                 shear_range=0.1,</span>
+<span class="c1">#                                 zoom_range=0.2,</span>
+<span class="c1">#                                 horizontal_flip=True,</span>
+<span class="c1">#                                 width_shift_range=0.1,</span>
+<span class="c1">#                                 height_shift_range=0.1)</span>
+
+<span class="c1"># test_generator = test_datagen.flow_from_dataframe(df_test,x_col=&#39;filename&#39;,y_col=&#39;category&#39;,</span>
+<span class="c1">#                                                  target_size=size,</span>
+<span class="c1">#                                                  class_mode=&#39;categorical&#39;,</span>
+<span class="c1">#                                                  batch_size=batch_size)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Found 815 validated image filenames belonging to 3 classes.
+Found 204 validated image filenames belonging to 3 classes.
+Found 180 validated image filenames belonging to 3 classes.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, we will fit the model on the training data and validate it on the validation data. Various epochs and batch sizes were tried and due to the time it took to run the model, 3 and 10 were chosen respectively.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     train_generator, </span>
+<span class="c1">#     epochs=3,</span>
+<span class="c1">#     validation_data=validation_generator,</span>
+<span class="c1">#     batch_size=batch_size,</span>
+<span class="c1">#     verbose=1</span>
+<span class="c1"># )</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As the plot illustrates, the model does not have a high accuracy. A lot of layers were added to the model including batch normalization and dropout layers to make the code run more efficiently.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for ax, measure in zip(axes, [&#39;loss&#39;, &#39;accuracy&#39;]):</span>
+<span class="c1">#     ax.plot(hist.history[measure], label=measure)</span>
+<span class="c1">#     ax.plot(hist.history[&#39;val_&#39; + measure], label=&#39;val_&#39; + measure)</span>
+<span class="c1">#     ax.legend()</span>
+<span class="c1"># plt.show()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The test accuracy is about 63%.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test_acc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following code manipulates the test data frame to be used for predictions.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     &#39;filename&#39;: testfiles</span>
+<span class="c1"># })</span>
+<span class="c1"># nb_samples = test_df.shape[0]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following code makes predictions from the model.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Checking the prediction of one image by feeding an image of a beetle. The classification was a beetle. Yay!</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     0:&#39;beetles&#39;,</span>
+<span class="c1">#     1:&#39;cockroach&#39;,</span>
+<span class="c1">#     2:&#39;dragonflies&#39;</span>
+<span class="c1"># }</span>
+<span class="c1"># from PIL import Image</span>
+<span class="c1"># import numpy as np</span>
+<span class="c1"># im=Image.open(&quot;insects/test/beetles/5556745.jpg&quot;)</span>
+<span class="c1"># im=im.resize(size)</span>
+<span class="c1"># im=np.expand_dims(im,axis=0)</span>
+<span class="c1"># im=np.array(im)</span>
+<span class="c1"># im=im/255</span>
+<span class="c1"># pred=model.predict_classes([im])[0]</span>
+<span class="c1"># print(pred,results[pred])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0 beetles
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will describe how well the model performed using shapley additive explanations.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I tried the following code and several other versions of what is below to convert the training and test sets into numpy arrays to be used in the gradient explainer and for the shapley values. After analyzing the output of the train and test generator (code above), I realized that the data was in batches and I would need to unbatch the data for this to work and plot the images correctly. So, I scratched this idea and skipped to what is shown below.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ytrain = []</span>
+
+<span class="c1"># xtrain=np.concatenate([train_generator.next()[0] for i in range(train_generator.__len__())])</span>
+<span class="c1"># ytrain=np.concatenate([train_generator.next()[1] for i in range(train_generator.__len__())])</span>
+
+<span class="c1"># xtest = []</span>
+<span class="c1"># ytest = []</span>
+
+<span class="c1"># xtest=np.concatenate([test_generator.next()[0] for i in range(test_generator.__len__())])</span>
+<span class="c1"># ytest=np.concatenate([test_generator.next()[1] for i in range(test_generator.__len__())])</span>
+
+<span class="c1"># ytest = np.where(ytest == 0, &quot;beetles&quot;, np.where(ytest == 1, &quot;cockroach&quot;, &quot;dragonflies&quot;))</span>
+
+<span class="c1"># explainer = shap.GradientExplainer(model, xtrain)</span>
+<span class="c1"># shap_vals = explainer.shap_values(xtest[:3])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following code produces the shapley values on the test data using a gradient from the model and background (training data).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># shap_vals, index = explainer.shap_values(test_generator[0][0], ranked_outputs = 3)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, we will create a numpy array to label the images.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># index_names = np.vectorize(lambda x: names[x])(index)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, we will plot the images and see what parts of the images are most important in creating the image classification.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plt.savefig(&#39;shap.jpg&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display.Image(&quot;./shap.jpg&quot;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/bios-823-blog/2021/11/12/deeplearning.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/bios-823-blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/bios-823-blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/bios-823-blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/bios-823-blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/bios-823-blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
