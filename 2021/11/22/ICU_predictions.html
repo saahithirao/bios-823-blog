@@ -4,9 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Title | fastpages</title>
+<title>Predicting patient death in the ICU | fastpages</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Title" />
+<meta property="og:title" content="Predicting patient death in the ICU" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
 <meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-11-22T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2021-11-22T00:00:00-06:00","url":"https://saahithirao.github.io/bios-823-blog/2021/11/22/ICU_predictions.html","@type":"BlogPosting","headline":"Title","dateModified":"2021-11-22T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saahithirao.github.io/bios-823-blog/2021/11/22/ICU_predictions.html"},"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@context":"https://schema.org"}</script>
+{"datePublished":"2021-11-22T00:00:00-06:00","url":"https://saahithirao.github.io/bios-823-blog/2021/11/22/ICU_predictions.html","@type":"BlogPosting","headline":"Predicting patient death in the ICU","dateModified":"2021-11-22T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saahithirao.github.io/bios-823-blog/2021/11/22/ICU_predictions.html"},"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/bios-823-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saahithirao.github.io/bios-823-blog/feed.xml" title="fastpages" />
 
@@ -90,13 +90,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Title</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-11-22T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Predicting patient death in the ICU</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-11-22T00:00:00-06:00" itemprop="datePublished">
         Nov 22, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      7 min read
+      9 min read
     
 </span></p>
 
@@ -138,7 +138,6 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Predicting probability of patient death in the ICU</strong></p>
 <p>Team members included: Shusaku Asai, Saahithi Rao, Michael Tang, Yi Feng</p>
 
 </div>
@@ -466,7 +465,8 @@ View code: <a href="https://github.com/delashu/BIOS823_Project">https://github.c
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I helped Shu with the feature engineering. I explored the data and specifically the missingness and decided how to deal with these values. Once the crosstables of prescriptions and procedures had been created, I helped with writing a function that would take the four dataframes of interest, merge and clean the data, and output an analytic dataframe. I helped merge the dataframes and confirm that the data looked like what we expected. I determined how to categorize diagnoses. Once we had the analytic dataframe</p>
+<p>I helped Shu with the feature engineering. I explored the data and specifically the missingness and decided how to deal with these values. For example, I relabelled nas in other in many of the columns and as 0 in the outcome column. Once the crosstables of prescriptions and procedures had been created, I helped with writing a function that would take the four dataframes of interest, merge and clean the data, and output an analytic dataframe. I helped merge the dataframes and confirm that the data looked like what we expected. I determined how to categorize diagnoses. Once we had the analytic dataframe, I ran the baseline modeling on the demo data. This involved processing the data and splitting into training and test sets before running several classification models. I converted categorical variables into dummy variables. I compared the AUC of each of the models, performed stacking, and grid search to determine the best parameters. I created plots of the confusion matrix, ROC curve, precision-recall curve, and learning curves. I saved the best model and used that to create a skeleton of model predictions in our dashboard until the full data could be used. I matched the user inputs to the model features by creating a dataframe from the user inputs that were in the same order and number of features in the model. This was long process because we didn't want the user inputs on the dashboard to look clunky, so we had to use a lot of if, else statements to create the dataframe. I, then, deployed the best model onto the dashboard that took the user inputs and would make a prediction of the probability of a patient dying in the ICU.</p>
+<p>I learned how to perform machine learning algorithms in python and improved both my content knowledge of classification models and python proficiency with running models and making predictions. It was difficult to prioritize work on this project along with many other group projects, but I learned to set goals for each of our team meetings and slowly chip away at tasks for the project to keep it moving. I learned to utilize the skill sets of my team members as some were good at envisoning how the dashboard should look and some were used to working with big data sets and to build on my own strengths of</p>
 
 </div>
 </div>
