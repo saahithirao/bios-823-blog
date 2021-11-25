@@ -451,11 +451,55 @@ View code: <a href="https://github.com/delashu/BIOS823_Project">https://github.c
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The final step was creating the product. We chose to visualize the data and ouput predictions from our model through a dashboard. The dashboard was created using Streamlit with intentions of taking user inputs for the different features (characteristics of a patient) to output a prediction of the probability of that patient dying. We integrated interactive exploratory plots of the continuous and categorical variables. We also add user inputs for the different features in our model. This would be useful for a doctor, who could input the characteristics of their patient and determine the probability their patient dying.</p>
+<p>The final step was creating the product. We chose to visualize the data and ouput predictions from our model through a dashboard. The dashboard was created using Streamlit with intentions of taking user inputs for the different features (characteristics of a patient) to output a prediction of the probability of that patient dying. We integrated interactive exploratory plots of the continuous and categorical variables. We also add user inputs for the different features in our model. This would be useful for a doctor, who could input the characteristics of their patient and determine the probability their patient dying. Below is a sample of the code used in the dashboard.</p>
 
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;**II: Predictive Modeling**&quot;</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;Input patient information below to output risk of ICU death.&quot;</span><span class="p">))</span>
+<span class="n">los_select</span> <span class="o">=</span> <span class="n">col5</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Length of Stay&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ACE_select</span> <span class="o">=</span> <span class="n">col6</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;ACET325&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">CAL_select</span> <span class="o">=</span> <span class="n">col7</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;CALG1I&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># make pandas dataframe from the user input with default values</span>
+<span class="n">predat</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;los&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">los_select</span><span class="p">],</span> <span class="s1">&#39;ACET325&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">ACE_select</span><span class="p">],</span><span class="s1">&#39;CALG1I&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">CAL_select</span><span class="p">],</span> <span class="s1">&#39;D5W1000&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">DW_select</span><span class="p">],</span>
+<span class="s1">&#39;D5W250&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">DW2_select</span><span class="p">]}</span>
+
+<span class="c1"># data frame variables need to match features of model</span>
+<span class="c1"># set categorical features based on user input</span>
+<span class="k">if</span> <span class="n">fw_select</span> <span class="o">==</span> <span class="s2">&quot;52&quot;</span><span class="p">:</span>
+    <span class="n">pred_df</span><span class="p">[</span><span class="s1">&#39;first_wardid_52&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">elif</span> <span class="n">fw_select</span> <span class="o">==</span> <span class="s2">&quot;Other&quot;</span><span class="p">:</span>
+    <span class="n">pred_df</span><span class="p">[</span><span class="s1">&#39;first_wardid_Other&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">#make np dataframe into array</span>
+<span class="n">pred_array</span> <span class="o">=</span> <span class="n">pred_df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1">#make prediction!</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">pred_array</span><span class="p">[:</span><span class="mi">1</span><span class="p">])[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># output death predictions as score from 0 to 100</span>
+<span class="n">model_score</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">#output the score</span>
+<span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;**Patient Death Prediction Score**&quot;</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="n">metric</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Model Risk Prediction Score&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">model_score</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;%&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Individual Contributions</strong></p>
@@ -465,7 +509,7 @@ View code: <a href="https://github.com/delashu/BIOS823_Project">https://github.c
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I helped Shu with the feature engineering. I explored the data and specifically the missingness and decided how to deal with these values. For example, I relabelled nas in other in many of the columns and as 0 in the outcome column. Once the crosstables of prescriptions and procedures had been created, I helped with writing a function that would take the four dataframes of interest, merge and clean the data, and output an analytic dataframe. I helped merge the dataframes and confirm that the data looked like what we expected. I determined how to categorize diagnoses. Once we had the analytic dataframe, I ran the baseline modeling on the demo data. This involved processing the data and splitting into training and test sets before running several classification models. I converted categorical variables into dummy variables. I compared the AUC of each of the models, performed stacking, and grid search to determine the best parameters. I created plots of the confusion matrix, ROC curve, precision-recall curve, and learning curves. I saved the best model and used that to create a skeleton of model predictions in our dashboard until the full data could be used. I matched the user inputs to the model features by creating a dataframe from the user inputs that were in the same order and number of features in the model. This was long process because we didn't want the user inputs on the dashboard to look clunky, so we had to use a lot of if, else statements to create the dataframe. I, then, deployed the best model onto the dashboard that took the user inputs and would make a prediction of the probability of a patient dying in the ICU.</p>
+<p>I helped Shu with the feature engineering. I explored the data and specifically the missingness and decided how to deal with these values. For example, I relabelled nas in other in many of the columns and as 0 in the outcome column. Once the crosstables of prescriptions and procedures had been created, I helped with writing a function that would take the four dataframes of interest, merge and clean the data, and output an analytic dataframe. I helped merge the dataframes and confirm that the data looked like what we expected. I determined how to categorize diagnoses. Once we had the analytic dataframe, I ran the baseline modeling on the demo data. This involved processing the data and splitting into training and test sets before running several classification models. I converted categorical variables into dummy variables. I compared the AUC of each of the models, performed stacking, and grid search to determine the best parameters. I created plots of the confusion matrix, ROC curve, precision-recall curve, and learning curves. I saved the best model and used that to create a skeleton of model predictions in our dashboard until the full data could be used. I matched the user inputs to the model features by creating a dataframe from the user inputs that were in the same order and number of features in the model. This was long process because we didn't want the user inputs on the dashboard to look clunky, so we had to use a lot of if, else statements to create the dataframe. I, then, deployed the best model onto the dashboard that took the user inputs and would make a prediction of the probability of a patient dying in the ICU. I helped with publishing the dashboard.</p>
 <p>I learned how to perform machine learning algorithms in python and improved both my content knowledge of classification models and python proficiency with running models and making predictions. It was difficult to prioritize work on this project along with many other group projects, but I learned to set goals for each of our team meetings and slowly chip away at tasks for the project to keep it moving. I learned to utilize the skill sets of my team members as some were good at envisoning the dashboard and its different components and some were comfortable working with big data sets and to build on my own strengths of thinking through how the analytic data should look and trying different analytic methods. This project was a good culmination of the course as we got to implement different concepts that we learned and had the freedom to create a data product that we wanted.</p>
 
 </div>
